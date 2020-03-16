@@ -1,0 +1,17 @@
+(deftest "CRUD")
+
+(data_put "test_database" "test" "OK")
+(assert-eq '"OK" '(data_get "test_database" "test"))
+(assert-eq '(list (cons "test" "OK")) '(data_list "test_database"))
+(data_backup "test_database")
+(assert-eq '"OK" '(ldata_get "test_database" "test"))
+(data_delete "test_database" "test")
+(assert-eq 'nil '(data_get "test_database" "test"))
+
+(ldata_put "test_ldatabase" "test" "OK")
+(assert-eq '"OK" '(ldata_get "test_ldatabase" "test"))
+(assert-eq '(list (cons "test" "OK")) '(ldata_list "test_ldatabase"))
+(data_restore "test_ldatabase")
+(assert-eq '"OK" '(data_get "test_ldatabase" "test"))
+(ldata_delete "test_ldatabase" "test")
+(assert-eq 'nil '(ldata_get "test_ldatabase" "test"))
