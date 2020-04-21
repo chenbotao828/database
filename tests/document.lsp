@@ -64,6 +64,12 @@
 (assert-eq '1 '(len (do td 'objects)))
 ;; (assert-eq '"DB_TEST_DOCUMENT" '(do td 'DB_name))
 
+(do_reload 'td)
+(do td (list 'update_all (al_make '(c 1 b 1))))
+(do_reload 'td)
+(assert-eq '1 '(do td 'c))
+(assert-eq '1 '(do td 'b))
+
 (setq td nil
       td_id nil
       _test_document nil
